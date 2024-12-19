@@ -1,0 +1,104 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+class student
+{
+    static int count;
+    string name,add,bg,Class,dob;
+    int rno,mob,tel;
+    char div;
+    public:
+        student()
+        {
+            rno=150;
+            name="Yash";                                                   
+            div='A';
+            add="sangamner";
+            dob="11/01/2006";
+            mob=369821547;
+            bg="B+";
+            Class="SE";
+            count++;
+        }
+        student(student &s)
+        {
+            rno=s.rno;
+            name=s.name;          
+            div=s.div;
+            add=s.add;
+            dob=s.dob;
+            mob=s.mob;
+            bg=s.bg;
+            Class=s.Class;
+            count++;
+            
+        }
+        void read()
+        {
+            cout<<"\n enter the name of student=";
+            cin>>name;
+            cout<<"\n enter the roll no=";
+            cin>>rno;
+            cout<<"\n enter class=";
+            cin>>Class;
+            cout<<"\n enter the div=";
+            cin>>div;
+            cout<<"\n enter the address=";
+            cin>>add;
+            cout<<"\n enter the dob=";
+            cin>>dob;
+            cout<<"\n enter the mob=";
+            cin>>mob;
+            cout<<"\n enter the blood group=";
+            cin>>bg;
+            
+                
+        }
+        friend void display(student *p);
+        
+        static void displaycount()
+        {
+            cout<<"\n no.of students="<<count;
+        }
+        ~student()
+        {
+            cout<<"\n"<<this->name<<"is destroyed";
+        }
+    };
+    void display(student *p)
+    {
+        cout<<"\n rno="<<p->rno;
+        cout<<"\n name="<<p->name;
+        cout<<"\n Class="<<p->Class;
+        cout<<"\n div="<<p->div;
+        cout<<"\n add="<<p->add;
+        cout<<"\n dob="<<p->dob;
+        cout<<"\n mob="<<p->mob;
+        cout<<"\n bg="<<p->bg;
+    }
+    int student::count=0;
+    int main()
+    {
+        student s1,s2(s1);
+        int n,i;
+        student *ptr[n];
+        cout<<"\n enter how many students data want to display ";
+        cin>>n;
+        for(i=0;i<n;i++)
+        {
+            ptr[i]=new student();
+            ptr[i]->read();
+            
+        }
+        cout<<"\n students data=\n";
+        display(&s1);
+        display(&s2);
+        for(i=0;i<n;i++)
+        display(ptr[i]);
+        student::displaycount();
+        for(i=0;i<n;i++)
+        {
+            delete(ptr[i]);
+        }
+    return 0;
+    }
